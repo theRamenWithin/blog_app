@@ -35,6 +35,7 @@ last_name
 DOB :date
 username
 email
+avatar (optional)
 admin? :boolean
 post_id :references (optional)
 
