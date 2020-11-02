@@ -1,4 +1,4 @@
 class Post < ApplicationRecord
-  belongs_to :attachment
-  belongs_to :comment
+  has_many :comments
+  validates :title, :body, presence: true
 end
