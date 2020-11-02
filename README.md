@@ -27,7 +27,7 @@ As a reader I want to be able to quick reaction with emoji to a post (sprinkles)
 As an administrator I want to be view, edit and delete any user posts
 As an administrator I want to see statistics on post metrics like times keywords used, post of top likes (sprinkles)
 
-## ERD
+## ERD *****
 
 Users - Table
 first_name 
