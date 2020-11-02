@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
-  belongs_to :attachment
-  belongs_to :comment
+  has_one :attachment
+  accepts_nested_attributes_for :attachment
+  has_many :comments
 end
