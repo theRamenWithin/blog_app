@@ -1,0 +1,11 @@
+# Comments partial
+
+<h1>Comments</h1>
+<h3><%= comment.created_at %>:</h3>
+
+<%= comment.body %>
+<%= comment.likes %>
+
+<%= link_to 'Delete', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
+
+
