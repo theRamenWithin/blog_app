@@ -12,12 +12,16 @@
   <body>
     <%= render "partials/navbar.html.erb" %>
 
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <% unless alert.nil? %>
+      <div class="alert alert-success" role="alert">
         <%= alert %>
-    </div>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      </div>
+    <% end %>
+    <% unless notice.nil? %>
+      <div class="alert alert-warning" role="alert">
         <%= notice %>
-    </div>
+      </div>
+    <% end %>
 
     <div class="container">
       <%= yield %>
