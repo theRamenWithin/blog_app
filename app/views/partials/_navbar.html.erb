@@ -17,7 +17,7 @@
             </li>
         <% else %>
             <li class="nav-item">
-                <a class="nav-link">Welcome back, <%= current_user.username.titalize %></a>
+                <a class="nav-link">Welcome back, <%= current_user.username.titleize %></a>
             </li>
             <li class="nav-item">
                 <%= link_to "Your Posts", posts_path, method: :get, class: "nav-link" %>
