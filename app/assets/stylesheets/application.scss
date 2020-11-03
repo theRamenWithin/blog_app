@@ -15,3 +15,26 @@
  */
 
 @import "bootstrap";
+
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+}
+
+.container {
+    padding-top: 15px;
+    height: 100vh;
+    background: white;
+}
+
+.cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin: 10px;
+    text-align: justify;
+}
