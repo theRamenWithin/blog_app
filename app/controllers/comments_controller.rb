@@ -16,6 +16,10 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @comment = Comment.new
+    # @comment.user_id = .user_id
+    @post = params[:post]
+    @user = params[:user]
+  
   end
 
   # GET /comments/1/edit
@@ -25,7 +29,7 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @post = Post.find(params[:post_id])
+      @post = Post.find(params[:post_id])
       @comment = @post.comments.create(params[:comment].permit(:name, :comment))
       @comment.user_id = current_user.id #double check session name in application_controller.rb and insert here
 
