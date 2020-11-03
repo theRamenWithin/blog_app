@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /comments
   # GET /comments.json
@@ -24,17 +25,18 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    @post = Post.find(params[:post_id])
+      @comment = @post.comments.create(params[:comment].permit(:name, :comment))
+      @comment.user_id = current_user.id #double check session name in appliaction_controller.rb and insert here
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
+          redirect_to @post
       else
-        format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+          flash.now[:danger] = "An error has occured."
       end
     end
+
   end
 
   # PATCH/PUT /comments/1
@@ -49,12 +51,15 @@ class CommentsController < ApplicationController
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end 
 
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.find(params[:id])
     @comment.destroy
+    redirect_to post_path(@post)
     respond_to do |format|
       format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
@@ -69,6 +74,6 @@ class CommentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comment_params
-      params.require(:comment).permit(:body, :likes, :post_id, :user_id)
+      params.require(:comment).permit(:post_id, :user_id)
     end
 end

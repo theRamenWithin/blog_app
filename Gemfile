@@ -58,3 +58,5 @@ gem "devise", "~> 4.7"
 gem "cancan", "~> 1.6"
 gem "bootstrap", "~> 4.5"
 gem "simple_form", "~> 5.0"
+
+gem "jquery-rails", "~> 4.4"

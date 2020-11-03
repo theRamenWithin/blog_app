@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
-  has_many :comments
+  has_one :attachment
+  accepts_nested_attributes_for :attachment
+  has_many :comments, dependent: :destroy
   validates :title, :body, presence: true
 end
