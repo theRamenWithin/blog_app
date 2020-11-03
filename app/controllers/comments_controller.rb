@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
       @comment = @post.comments.create(params[:comment].permit(:name, :comment))
-      @comment.user_id = current_user.id #double check session name in appliaction_controller.rb and insert here
+      @comment.user_id = current_user.id #double check session name in application_controller.rb and insert here
 
     respond_to do |format|
       if @comment.save

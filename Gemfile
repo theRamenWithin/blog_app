@@ -60,3 +60,5 @@ gem "bootstrap", "~> 4.5"
 gem "simple_form", "~> 5.0"
 
 gem "jquery-rails", "~> 4.4"
+
+gem 'faker'
