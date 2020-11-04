@@ -1,6 +1,9 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_post, only: [:new]
+
+
 
   # GET /comments
   # GET /comments.json
@@ -16,9 +19,9 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     @comment = Comment.new
-    # @comment.user_id = .user_id
-    @post = params[:post]
-    @user = params[:user]
+    @comment.user_id = current_user.id
+    # @post = params[:post]
+    # @user = params[:user]
   
   end
 
@@ -29,17 +32,24 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-      @post = Post.find(params[:post_id])
-      @comment = @post.comments.create(params[:comment].permit(:name, :comment))
-      @comment.user_id = current_user.id #double check session name in application_controller.rb and insert here
+      puts "*****"
+      pp comment_params
+      puts "*****"
 
-    respond_to do |format|
-      if @comment.save
-          redirect_to @post
-      else
-          flash.now[:danger] = "An error has occured."
-      end
-    end
+    
+      @comment = Comment.new(comment_params)
+      
+      @comment.user_id = current_user.id
+
+      @comment.save
+     
+     
+      puts "*****"
+      p @comment
+      puts "*****"
+
+      redirect_to posts_path
+      
 
   end
 
@@ -78,6 +88,12 @@ class CommentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comment_params
-      params.require(:comment).permit(:post_id, :user_id)
+      params.require(:comment).permit(:post_id, :user_id, :body)
     end
+
+    def set_post
+      @post = Post.find(params[:post_id])
+      #_by id: params[:post]
+    end
+
 end
