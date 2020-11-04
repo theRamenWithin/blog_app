@@ -38,6 +38,10 @@ body {
     background: white;
 }
 
+.card-buttons {
+    margin: 2px 0px;
+}
+
 .cards {
     display: flex;
     justify-content: space-around;
@@ -47,6 +51,7 @@ body {
 .card {
     margin: 10px;
     text-align: justify;
+    background-color: lightgoldenrodyellow;
 }
 
 h2 {
