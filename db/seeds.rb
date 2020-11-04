@@ -35,7 +35,7 @@ Attachment.destroy_all
                     comment = Comment.new
                     comment.body = Faker::Lorem.sentence(word_count: 15)
                     comment.post_id = post.id
-                    comment.user_id = user.id
+                    comment.user_id = rand(1..20)
                     comment.save
                 end 
 
