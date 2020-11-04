@@ -63,3 +63,8 @@ gem "jquery-rails", "~> 4.4"
 
 gem 'faker'
 gem "bootstrap-icons", "~> 1.0"
+
+# Run against the latest stable release
+group :development, :test do
+  gem 'rspec-rails', '~> 4.0.1'
+end
