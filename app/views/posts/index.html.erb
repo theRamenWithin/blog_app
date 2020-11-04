@@ -6,10 +6,10 @@
     <div class="card-body">
       <h5 class="card-title"><%= post.title %></h5>
       <p class="card-text"><%= post.body %></p>
-      <%if post.comments.count >= 0 && current_user.id != post.user_id%>
-      <%= link_to 'Add Comment', new_comment_path(:comment, post: post.title), class:"btn btn-light"%>
+      <%if post.comments.count >= 0 %>
+      <%= link_to 'Add Comment', new_comment_path(:comment, post_id: post.id), class:"btn btn-light"%>
       <%end%>
-      <% if post.comments.count >= 1 %>
+      <% if post.comments.count >= 1 %> 
         <p>
           <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             Show Comments
@@ -17,10 +17,15 @@
         </p>
         <div class="collapse" id="collapseExample">
           <div class="card card-body">
-            <%= post.comments.body %>
+          
+            <% post.comments.each do |comment| %>
+            -
+            <%= comment.body %>
+            <br>
+            <% end %>
           </div>
         </div>
-      <% end %>
+      <% end %> 
 
       <!--<%= link_to 'Show', post, class: "btn btn-primary" %>-->
       <% if user_signed_in? && current_user.id == post.user_id %>
