@@ -1,43 +1,37 @@
 <h2>Posts</h2>
 
 <section class="cards">
-<% @posts.each do |post| %>
+<% @posts.reverse.each do |post| %>
   <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title"><%= post.title %></h5>
       <p class="card-text"><%= post.body %></p>
-      <%if post.comments.count >= 0 %>
-      <%= link_to 'Add Comment', new_comment_path(:comment, post_id: post.id), class:"btn btn-light"%>
-      <%end%>
-      <% if post.comments.count >= 1 %> 
-        <p>
+
+      <section class="card-buttons">
+        <% if post.comments.count >= 0 && user_signed_in? %>
+          <%= link_to 'Add Comment', new_comment_path(:comment, post_id: post.id), class:"btn btn-light"%>
+        <% end %>
+
+        <% if post.comments.count >= 1 %> 
           <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#tag_<%=post.id%>" aria-expanded="false" aria-controls="collapseExample">
             Show Comments
           </button>
 
-        </p>
-        <div class="collapse" id="tag_<%=post.id%>">
-          <div class="card card-body">
-            <% post.comments.each do |comment| %>
-            -
-            <%= comment.body %>
-            <br>
-            <% end %>
+          <div class="collapse" id="tag_<%=post.id%>">
+            <div class="card card-body">
+              <% post.comments.each do |comment| %>
+                - <%= comment.body %><br>
+              <% end %>
+            </div>
           </div>
-        </div>
-      <% end %> 
+        <% end %> 
 
-      <!--<%= link_to 'Show', post, class: "btn btn-primary" %>-->
-      <% if user_signed_in? && current_user.id == post.user_id %>
-        <%= link_to 'Edit', edit_post_path(post), class: "btn btn-light" %>
-        <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-      <% end %>
+        <% if user_signed_in? && current_user.id == post.user_id %>
+          <%= link_to 'Edit', edit_post_path(post), class: "btn btn-light" %>
+          <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+        <% end %>
+      </section>
     </div>
   </div>
 <% end %>
 </section>
-
-<br>
-<% if user_signed_in? %>
-  <%= link_to 'New Post', new_post_path %>
-<% end %>
