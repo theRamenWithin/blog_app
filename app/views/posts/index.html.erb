@@ -21,6 +21,7 @@
             <div class="card card-body">
               <% post.comments.each do |comment| %>
                 - <%= comment.body %><br>
+                <% comment.user_id %>
               <% end %>
             </div>
           </div>
