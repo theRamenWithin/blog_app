@@ -20,7 +20,7 @@
           <div class="collapse" id="tag_<%=post.id%>">
             <div class="card card-body">
               <% post.comments.each do |comment| %>
-                - <%= comment.body %>  Written by: <%= comment.user.first_name%>
+                - <%= comment.body %>  <strong>Written by: <%= comment.user.first_name%></strong>
                 <br>
               <% end %>
             </div>
